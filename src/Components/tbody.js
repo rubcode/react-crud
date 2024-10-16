@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const TbodyStyled = styled.tbody`
     
     tr{
-        border-block-end: 1px solid var(--grey);
+        border-block-end: 1px solid var(--greyDarken);
     }
     td{
         padding-inline: 1rem;

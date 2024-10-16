@@ -9,14 +9,14 @@ const TableStyled = styled.table`
     text-align: center;
 `
 
-function Table() {
+function Table({headers,data}) {
     return (
         <TableStyled>
             <Thead
-                headers={["NO","TAREA","FECHA ESTIMADA"]}
+                headers={headers}
             />
             <Tbody 
-                data={[{"task":"Hacer mi cama","deadline": "16-10-2024"}]}
+                data={data}
             />
         </TableStyled>
     )
