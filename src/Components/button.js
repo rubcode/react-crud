@@ -16,14 +16,25 @@ const ButtonStyled = styled.div`
     }
 `
 
-function Button({text,link,type,className,onClick}) {
+function Button({text,link,type,className,onClick,dataID}) {
     const component = link ? "a" : "button"
     return (
-        <ButtonStyled as={component} type={type} href={link} className={className} onClick={onClick}>
+        <ButtonStyled as={component} type={type} href={link} className={className} onClick={onClick} dataID={dataID}>
             {text}
         </ButtonStyled>
     )
 }
+
+export const ButtonIcon = styled(Button)`
+    background-color: transparent;
+    color: var(--primaryColor);
+    border: none;
+    font-size: 1.8rem;
+    min-inline-size: 50px;
+    &:hover{
+        color: var(--accentColor);
+    }
+`
 
 export const ButtonContrast = styled(Button)`
     background-color: var(--accentColor);

@@ -9,7 +9,7 @@ const TableStyled = styled.table`
     text-align: center;
 `
 
-function Table({headers,data}) {
+function Table({headers,data,setIDTask,setIsActiveModal}) {
     return (
         <TableStyled>
             <Thead
@@ -17,6 +17,8 @@ function Table({headers,data}) {
             />
             <Tbody 
                 data={data}
+                setIDTask={setIDTask}
+                setIsActiveModal={setIsActiveModal}
             />
         </TableStyled>
     )

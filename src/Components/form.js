@@ -33,9 +33,15 @@ function Form({...props}) {
         const formData = new FormData(form.current)
         const task = formData.get("task")
         const deadline = formData.get("deadline")
-        const headers = ["NO","TAREA","FECHA REALIZACIÓN"]
-        const data = {"task": task,"deadline":deadline}
+        
+        const data = {"ID":tasksList.length + 1,"task": task,"deadline":deadline}
         tasksList.push(data)
+        let headers
+        if(tasksList.length > 0){
+            headers = ["NO","TAREA","FECHA REALIZACIÓN","ACCIONES"]
+        }else{
+            headers = []
+        }
         props.setHeaders(headers)
        
     }
