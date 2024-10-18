@@ -4,7 +4,7 @@ import Form from './Components/form';
 import ContainerTable from './Components/container-table';
 import Table from './Components/table';
 import Modal from './Components/modal';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 
 
@@ -14,13 +14,10 @@ function App() {
   const [headers, setHeaders] = useState([])
   const [task,setTask] = useState("")
   const [deadline,setDeadline] = useState("")
-  const [idTask, setIDTask] = useState("")
+  const [selectedTask, setSelectedTask] = useState({})
   const [isActiveModal,setIsActiveModal] = useState(false)
 
-  useEffect(()=>{
-    const tasks = tasksList.filter(item => item.ID !== idTask)
-    setTaskList(tasks)
-  },[idTask,tasksList])
+
   
   
   return (
@@ -29,6 +26,10 @@ function App() {
       <Layout>
         <Modal
           isActiveModal={isActiveModal}
+          selectedTask={selectedTask}
+          setTask={setTask}
+          setDeadline={deadline}
+          setIsActiveModal={setIsActiveModal}
         />
         <h1 className='title'>Lista de Tareas</h1>
         <Form
@@ -46,8 +47,10 @@ function App() {
               <Table
                 headers={headers}
                 data={tasksList}
-                setIDTask={setIDTask}
                 setIsActiveModal={setIsActiveModal}
+                setTaskList={setTaskList}
+                setSelectedTask={setSelectedTask}
+                tasksList={tasksList}
               />
             </ContainerTable> : null
         }

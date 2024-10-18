@@ -47,8 +47,8 @@ function Form({...props}) {
     }
     return (
         <FormStyled ref={form} onSubmit={handlerSubmit}>
-            <InputText placeholder='Ingrese una tarea' name='task' type='text' value={props.task} onChange={handlerChangeTask}/> 
-            <InputText placeholder='Ingrese fecha termino' name='deadline' type='date' value={props.deadline} onChange={handlerChangeDeadline}/>
+            <InputText placeholder='Ingrese una tarea' name='task' type='text' value={props.task} onChange={handlerChangeTask} required/> 
+            <InputText placeholder='Ingrese fecha termino' name='deadline' type='date' value={props.deadline} onChange={handlerChangeDeadline} required/>
             <Button
                 text="Añadir"
             />

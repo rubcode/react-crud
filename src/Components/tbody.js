@@ -16,13 +16,14 @@ const TbodyStyled = styled.tbody`
     }
 `
 
-function Tbody({data,setIDTask,setIsActiveModal}) {
-    function handlerEdit(ID){
+function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask}) {
+    function handlerEdit(Task){
         setIsActiveModal(true)
-        console.log(ID)
+        setSelectedTask(Task)
     }
     function handlerDelete(ID){
-        setIDTask(ID)
+        const tasks = tasksList.filter(item => item.ID !== ID)
+        setTaskList(tasks)
     }
     return (
         <TbodyStyled>
@@ -33,7 +34,7 @@ function Tbody({data,setIDTask,setIsActiveModal}) {
                             <td key={`${index}_task`}>{item['task']}</td>
                             <td key={`${index}_deadline`}>{item['deadline']}</td>
                             <td key={`${index}_actions`}>
-                                <ButtonIcon text={<FaEdit/>} onClick={() => handlerEdit(item['ID'])}/>
+                                <ButtonIcon text={<FaEdit/>} onClick={() => handlerEdit(item)}/>
                                 <ButtonIcon text={<MdDelete/>} onClick={() => handlerDelete(item['ID'])}/>
                             </td>
                         </tr>

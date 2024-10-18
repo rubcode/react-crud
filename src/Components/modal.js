@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components'
 import Overlay from './overlay'
 import InputText from './input-text'
@@ -52,14 +52,28 @@ const ModalContentStyled = styled.div`
     }
 `
 
-function ModalContent({isActiveModal}) {
+function ModalContent({selectedTask,setTask,setDeadline,setIsActiveModal}) {
+    const form = useRef(null)
+    function handlerChangeTask(e){
+        setTask(e.target.value)
+    }
+    function handlerChangeDeadline(e){
+        setDeadline(e.target.value)
+    }
+    function handlerSubmit(e){
+        e.preventDefault()
+        const formData = new FormData(form.current)
+        const task = formData.get("task")
+        const deadline = formData.get("deadline")
+        setIsActiveModal(false)
+    }
     return (
         <Overlay>
             <ModalContentStyled>
                 <h2 className='title'>Editar Tarea</h2>
-                <form>
-                    <InputText type='text' name='task' placeholder='Ingrese Tarea'/>
-                    <InputText type='date' name='deadline' placeholder='Ingrese Fecha Compromiso'/>
+                <form ref={form} onSubmit={handlerSubmit}>
+                    <InputText type='text' name='task' placeholder='Ingrese Tarea' value={selectedTask.task} onChange={handlerChangeTask}/>
+                    <InputText type='date' name='deadline' placeholder='Ingrese Fecha Compromiso' value={selectedTask.deadline} onChange={handlerChangeDeadline}/>
                     <Button
                         text="Editar"
                     />
@@ -70,11 +84,16 @@ function ModalContent({isActiveModal}) {
     )
 }
 
-export default function Modal({isActive}){
-    if(isActive){
+export default function Modal({isActiveModal,selectedTask,setTask,setDeadline,setIsActiveModal}){
+    if(isActiveModal){
         return(
             <ModalPortal>
-                <ModalContent />
+                <ModalContent 
+                    selectedTask={selectedTask} 
+                    setTask={setTask}
+                    setDeadline={setDeadline}
+                    setIsActiveModal={setIsActiveModal}
+                />
             </ModalPortal>
         )
     }
