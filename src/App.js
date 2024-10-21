@@ -25,10 +25,11 @@ function App() {
       
       <Layout>
         <Modal
+          tasksList={tasksList}
+          setTaskList={setTaskList}
           isActiveModal={isActiveModal}
           selectedTask={selectedTask}
-          setTask={setTask}
-          setDeadline={deadline}
+          setSelectedTask={setSelectedTask}
           setIsActiveModal={setIsActiveModal}
         />
         <h1 className='title'>Lista de Tareas</h1>

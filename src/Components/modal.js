@@ -52,28 +52,36 @@ const ModalContentStyled = styled.div`
     }
 `
 
-function ModalContent({selectedTask,setTask,setDeadline,setIsActiveModal}) {
+function ModalContent({...props}) {
     const form = useRef(null)
     function handlerChangeTask(e){
-        setTask(e.target.value)
+        const updatedTask = { ...props.selectedTask, task: e.target.value };
+        props.setSelectedTask(updatedTask)
     }
     function handlerChangeDeadline(e){
-        setDeadline(e.target.value)
+        const updatedTask = { ...props.selectedTask, deadline: e.target.value };
+        props.setSelectedTask(updatedTask)
     }
     function handlerSubmit(e){
         e.preventDefault()
         const formData = new FormData(form.current)
+        let list = props.tasksList
+        console.log(list)
         const task = formData.get("task")
         const deadline = formData.get("deadline")
-        setIsActiveModal(false)
+        const index = list.findIndex(obj => obj.ID === 1);
+        list[index] = {"ID":1,"task":task,"deadline": deadline}
+        props.setTaskList(list)
+        props.setIsActiveModal(false)
+
     }
     return (
         <Overlay>
             <ModalContentStyled>
                 <h2 className='title'>Editar Tarea</h2>
                 <form ref={form} onSubmit={handlerSubmit}>
-                    <InputText type='text' name='task' placeholder='Ingrese Tarea' value={selectedTask.task} onChange={handlerChangeTask}/>
-                    <InputText type='date' name='deadline' placeholder='Ingrese Fecha Compromiso' value={selectedTask.deadline} onChange={handlerChangeDeadline}/>
+                    <InputText type='text' name='task' placeholder='Ingrese Tarea' value={props.selectedTask.task} onChange={handlerChangeTask}/>
+                    <InputText type='date' name='deadline' placeholder='Ingrese Fecha Compromiso' value={props.selectedTask.deadline} onChange={handlerChangeDeadline}/>
                     <Button
                         text="Editar"
                     />
@@ -84,15 +92,16 @@ function ModalContent({selectedTask,setTask,setDeadline,setIsActiveModal}) {
     )
 }
 
-export default function Modal({isActiveModal,selectedTask,setTask,setDeadline,setIsActiveModal}){
-    if(isActiveModal){
+export default function Modal({...props}){
+    if(props.isActiveModal){
         return(
             <ModalPortal>
                 <ModalContent 
-                    selectedTask={selectedTask} 
-                    setTask={setTask}
-                    setDeadline={setDeadline}
-                    setIsActiveModal={setIsActiveModal}
+                    selectedTask={props.selectedTask} 
+                    setSelectedTask={props.setSelectedTask}
+                    setIsActiveModal={props.setIsActiveModal}
+                    tasksList={props.tasksList}
+                    setTaskList={props.setTaskList}
                 />
             </ModalPortal>
         )
