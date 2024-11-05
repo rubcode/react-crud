@@ -4,7 +4,8 @@ import Form from './Components/form';
 import ContainerTable from './Components/container-table';
 import Table from './Components/table';
 import Modal from './Components/modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getTasks } from './Services/task';
 
 
 
@@ -17,7 +18,37 @@ function App() {
   const [selectedTask, setSelectedTask] = useState({})
   const [isActiveModal,setIsActiveModal] = useState(false)
 
+  useEffect(() => {
+    getTasks().then(({data,isError}) => {
+      if(isError){
+        console.log('Error al extraer datos');
+        return
+      }
+      let headers
+      const taskList = data.data
+      if(taskList.length > 0){
+            headers = ["NO","TAREA","FECHA REALIZACIÓN","ACCIONES"]
+      }
+      setTaskList(data.data);
+      setHeaders(headers)
+    }); 
+  },[]);
 
+  useEffect(() => {
+    getTasks().then(({data,isError}) => {
+      if(isError){
+        console.log('Error al extraer datos');
+        return
+      }
+      let headers
+      const taskList = data.data
+      if(taskList.length > 0){
+            headers = ["NO","TAREA","FECHA REALIZACIÓN","ACCIONES"]
+      }
+      setTaskList(data.data);
+      setHeaders(headers)
+    }); 
+  },[tasksList]);
   
   
   return (
@@ -39,7 +70,6 @@ function App() {
           setTask={setTask}
           setDeadline={setDeadline}
           tasksList={tasksList}
-          setHeaders={setHeaders}
           setTaskList={setTaskList}
         />
         {

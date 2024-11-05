@@ -22,7 +22,7 @@ function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask}) {
         setSelectedTask(Task)
     }
     function handlerDelete(ID){
-        const tasks = tasksList.filter(item => item.ID !== ID)
+        const tasks = tasksList.filter(item => item.id !== ID)
         setTaskList(tasks)
     }
     return (
@@ -30,12 +30,12 @@ function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask}) {
             {
                 data.map((item,index) =>{
                     return <tr key={index}>
-                            <td key={`${index}_ID`}>{item['ID']}</td>
+                            <td key={`${index}_ID`}>{item['id']}</td>
                             <td key={`${index}_task`}>{item['task']}</td>
                             <td key={`${index}_deadline`}>{item['deadline']}</td>
                             <td key={`${index}_actions`}>
                                 <ButtonIcon text={<FaEdit/>} onClick={() => handlerEdit(item)}/>
-                                <ButtonIcon text={<MdDelete/>} onClick={() => handlerDelete(item['ID'])}/>
+                                <ButtonIcon text={<MdDelete/>} onClick={() => handlerDelete(item['id'])}/>
                             </td>
                         </tr>
                     

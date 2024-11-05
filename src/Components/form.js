@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import InputText from './input-text'
 import {Button} from './button'
 import { useRef } from 'react'
+import { addTask } from '../Services/task'
 
 const FormStyled = styled.form`
     width: 100%;
@@ -27,22 +28,22 @@ function Form({...props}) {
         props.setDeadline(deadline)
     }
 
-    function handlerSubmit(e){
+    async function handlerSubmit(e){
         e.preventDefault()
         const tasksList = props.tasksList
         const formData = new FormData(form.current)
         const task = formData.get("task")
         const deadline = formData.get("deadline")
         
-        const data = {"ID":tasksList.length + 1,"task": task,"deadline":deadline}
-        tasksList.push(data)
-        let headers
-        if(tasksList.length > 0){
-            headers = ["NO","TAREA","FECHA REALIZACIÓN","ACCIONES"]
-        }else{
-            headers = []
+        const data = {"id":tasksList.length + 1,"task": task,"deadline":deadline}
+        const response = await addTask({"task": task,"deadline": deadline})
+        if(response.code === "000"){
+            props.setTaskList((prevTasks) => [...prevTasks, data]);
         }
-        props.setHeaders(headers)
+        
+        
+        
+
        
     }
     return (
