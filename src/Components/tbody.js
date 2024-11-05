@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { ButtonIcon } from './button'
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { deleteTask } from '../Services/task';
 
 const TbodyStyled = styled.tbody`
     
@@ -21,9 +22,18 @@ function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask}) {
         setIsActiveModal(true)
         setSelectedTask(Task)
     }
-    function handlerDelete(ID){
-        const tasks = tasksList.filter(item => item.id !== ID)
-        setTaskList(tasks)
+    async function handlerDelete(ID){
+        const params = {
+            "id": ID
+        }
+        const response = await deleteTask(params)
+        if(response === "000"){
+            const tasks = tasksList.filter(item => item.id !== ID)
+            setTaskList(tasks)
+        }else{
+            console.log(response)
+        }
+        
     }
     return (
         <TbodyStyled>
