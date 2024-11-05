@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Overlay from './overlay'
 import InputText from './input-text'
 import { Button } from './button'
+import { updateTask } from '../Services/task';
 import ReactDOM from 'react-dom'
 
 const modalRoot = document.getElementById("portal");
@@ -62,17 +63,29 @@ function ModalContent({...props}) {
         const updatedTask = { ...props.selectedTask, deadline: e.target.value };
         props.setSelectedTask(updatedTask)
     }
-    function handlerSubmit(e){
+
+    async function handlerSubmit(e){
         e.preventDefault()
         const formData = new FormData(form.current)
+        const ID = props.selectedTask.id
         let list = props.tasksList
-        console.log(list)
         const task = formData.get("task")
         const deadline = formData.get("deadline")
-        const index = list.findIndex(obj => obj.ID === 1);
-        list[index] = {"ID":1,"task":task,"deadline": deadline}
-        props.setTaskList(list)
-        props.setIsActiveModal(false)
+        const params = {
+            "id": ID,
+            "task": task,
+            "deadline": deadline
+        }
+        const index = list.findIndex(obj => obj.ID === ID);
+        const response = await updateTask(params,ID)
+        if(response.data.code === "000"){
+            list[index] = {"ID":1,"task":task,"deadline": deadline}
+            props.setTaskList(list)
+            props.setIsActiveModal(false)
+        }else{
+            console.log(response)
+        }
+        
 
     }
     return (

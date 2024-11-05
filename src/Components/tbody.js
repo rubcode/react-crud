@@ -27,7 +27,7 @@ function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask}) {
             "id": ID
         }
         const response = await deleteTask(params)
-        if(response === "000"){
+        if(response.data.code === "000"){
             const tasks = tasksList.filter(item => item.id !== ID)
             setTaskList(tasks)
         }else{

@@ -26,6 +26,17 @@ export async function addTask(params){
     return fetchHandler(`${BASE_API}/tasks/`,options);
 }
 
+export async function updateTask(params,ID){
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify(params),
+        headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'}
+    }
+    return fetchHandler(`${BASE_API}/tasks/${ID}`,options);
+}
+
 export async function deleteTask(params){
     const options = {
         method: 'DELETE',

@@ -37,8 +37,10 @@ function Form({...props}) {
         
         const data = {"id":tasksList.length + 1,"task": task,"deadline":deadline}
         const response = await addTask({"task": task,"deadline": deadline})
-        if(response.code === "000"){
+        if(response.data.code === "000"){
             props.setTaskList((prevTasks) => [...prevTasks, data]);
+            props.setTask("")
+            props.setDeadline("")
         }
         
         
