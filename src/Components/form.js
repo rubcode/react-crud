@@ -35,8 +35,8 @@ function Form({...props}) {
         const task = formData.get("task")
         const deadline = formData.get("deadline")
         
-        const data = {"id":tasksList.length + 1,"task": task,"deadline":deadline}
-        const response = await addTask({"task": task,"deadline": deadline})
+        const data = {"id":tasksList.length + 1,"task": task,"deadline":deadline,"status": "PENDIENTE"}
+        const response = await addTask({"task": task,"deadline": deadline,"status": "PENDIENTE"})
         if(response.data.code === "000"){
             props.setTaskList((prevTasks) => [...prevTasks, data]);
             props.setTask("")

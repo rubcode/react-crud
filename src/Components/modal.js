@@ -59,8 +59,14 @@ function ModalContent({...props}) {
         const updatedTask = { ...props.selectedTask, task: e.target.value };
         props.setSelectedTask(updatedTask)
     }
+
     function handlerChangeDeadline(e){
         const updatedTask = { ...props.selectedTask, deadline: e.target.value };
+        props.setSelectedTask(updatedTask)
+    }
+
+    function handlerChangeStatus(e){
+        const updatedTask = { ...props.selectedTask, status: e.target.value };
         props.setSelectedTask(updatedTask)
     }
 
@@ -71,10 +77,12 @@ function ModalContent({...props}) {
         let list = props.tasksList
         const task = formData.get("task")
         const deadline = formData.get("deadline")
+        const status = formData.get("status")
         const params = {
             "id": ID,
             "task": task,
-            "deadline": deadline
+            "deadline": deadline,
+            "status": status
         }
         const index = list.findIndex(obj => obj.ID === ID);
         const response = await updateTask(params,ID)
@@ -95,6 +103,7 @@ function ModalContent({...props}) {
                 <form ref={form} onSubmit={handlerSubmit}>
                     <InputText type='text' name='task' placeholder='Ingrese Tarea' value={props.selectedTask.task} onChange={handlerChangeTask}/>
                     <InputText type='date' name='deadline' placeholder='Ingrese Fecha Compromiso' value={props.selectedTask.deadline} onChange={handlerChangeDeadline}/>
+                    <InputText type='text' name='status' placeholder='Ingrese Estatus' value={props.selectedTask.status} onChange={handlerChangeStatus}/>
                     <Button
                         text="Editar"
                     />

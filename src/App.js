@@ -24,36 +24,18 @@ function App() {
         console.log('Error al extraer datos');
         return
       }
-      let headers
+      
       const taskList = data.data
-      if(taskList.length > 0){
-            headers = ["NO","TAREA","FECHA REALIZACIÓN","ACCIONES"]
-      }
+      const headers =  (taskList.length > 0) ? ["NO","TAREA","FECHA REALIZACIÓN","ESTATUS","ACCIONES"] : []
       setTaskList(data.data);
       setHeaders(headers)
     }); 
   },[]);
 
-  useEffect(() => {
-    getTasks().then(({data,isError}) => {
-      if(isError){
-        console.log('Error al extraer datos');
-        return
-      }
-      let headers
-      const taskList = data.data
-      if(taskList.length > 0){
-            headers = ["NO","TAREA","FECHA REALIZACIÓN","ACCIONES"]
-      }
-      setTaskList(data.data);
-      setHeaders(headers)
-    }); 
-  },[tasksList]);
   
   
   return (
     <div className="App">
-      
       <Layout>
         <Modal
           tasksList={tasksList}

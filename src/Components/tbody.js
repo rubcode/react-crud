@@ -28,7 +28,7 @@ function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask}) {
         }
         const response = await deleteTask(params)
         if(response.data.code === "000"){
-            const tasks = tasksList.filter(item => item.id !== ID)
+            const tasks = tasksList.filter(item => item.id !== ID)  
             setTaskList(tasks)
         }else{
             console.log(response)
@@ -43,6 +43,7 @@ function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask}) {
                             <td key={`${index}_ID`}>{item['id']}</td>
                             <td key={`${index}_task`}>{item['task']}</td>
                             <td key={`${index}_deadline`}>{item['deadline']}</td>
+                            <td key={`${index}_status`}>{item['status']}</td>
                             <td key={`${index}_actions`}>
                                 <ButtonIcon text={<FaEdit/>} onClick={() => handlerEdit(item)}/>
                                 <ButtonIcon text={<MdDelete/>} onClick={() => handlerDelete(item['id'])}/>
