@@ -9,7 +9,7 @@ const TableStyled = styled.table`
     text-align: center;
 `
 
-function Table({headers,data,tasksList,setTaskList,setIsActiveModal,setSelectedTask}) {
+function Table({headers,data,tasksList,setTaskList,setIsActiveModal,setSelectedTask,setIsActiveModalComment}) {
     return (
         <TableStyled>
             <Thead
@@ -21,6 +21,7 @@ function Table({headers,data,tasksList,setTaskList,setIsActiveModal,setSelectedT
                 setTaskList={setTaskList}
                 tasksList={tasksList}
                 setSelectedTask={setSelectedTask}
+                setIsActiveModalComment={setIsActiveModalComment}
             />
         </TableStyled>
     )

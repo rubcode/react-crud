@@ -7,6 +7,7 @@ import Modal from './Components/modal';
 import Filters from './Components/filters';
 import { useState, useEffect } from 'react';
 import { getTasks } from './Services/task';
+import ModalComments from './Components/Modals/ModalContentComments';
 
 
 
@@ -19,6 +20,7 @@ function App() {
   const [deadline,setDeadline] = useState("")
   const [selectedTask, setSelectedTask] = useState({})
   const [isActiveModal,setIsActiveModal] = useState(false)
+  const [isActiveModalComment,setIsActiveModalComment] = useState(false)
   const [statusFilter, setStatusFilter] = useState('TODAS');
 
   useEffect(() => {
@@ -42,6 +44,11 @@ function App() {
   return (
     <div className="App">
       <Layout>
+        <ModalComments
+          selectedTask={selectedTask}
+          isActiveModalComment={isActiveModalComment}
+          setIsActiveModalComment={setIsActiveModalComment}
+        />
         <Modal
           tasksList={tasksList}
           setTaskList={setTaskList}
@@ -74,6 +81,7 @@ function App() {
                   headers={headers}
                   data={filteredTasks}
                   setIsActiveModal={setIsActiveModal}
+                  setIsActiveModalComment={setIsActiveModalComment}
                   setTaskList={setTaskList}
                   setSelectedTask={setSelectedTask}
                   tasksList={tasksList}

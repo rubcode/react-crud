@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { ButtonIcon } from './button'
 import { FaEdit } from "react-icons/fa";
+import { FaComment } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { deleteTask } from '../Services/task';
 
@@ -17,7 +18,12 @@ const TbodyStyled = styled.tbody`
     }
 `
 
-function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask}) {
+function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask,setIsActiveModalComment}) {
+    function handlerAddComment(Task){
+        setIsActiveModalComment(true)
+        setSelectedTask(Task)
+    }
+
     function handlerEdit(Task){
         setIsActiveModal(true)
         setSelectedTask(Task)
@@ -35,6 +41,8 @@ function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask}) {
         }
         
     }
+
+
     return (
         <TbodyStyled>
             {
@@ -45,8 +53,10 @@ function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask}) {
                             <td key={`${index}_deadline`}>{item['deadline']}</td>
                             <td key={`${index}_status`}>{item['status']}</td>
                             <td key={`${index}_actions`}>
+                                <ButtonIcon text={<FaComment/>} onClick={() => handlerAddComment(item)}/>
                                 <ButtonIcon text={<FaEdit/>} onClick={() => handlerEdit(item)}/>
                                 <ButtonIcon text={<MdDelete/>} onClick={() => handlerDelete(item['id'])}/>
+                                
                             </td>
                         </tr>
                     
