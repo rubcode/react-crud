@@ -18,10 +18,11 @@ function Table({headers,data,tasksList,setTaskList,setIsActiveModal,setSelectedT
             <Tbody 
                 data={data}
                 setIsActiveModal={setIsActiveModal}
+                setIsActiveModalComment={setIsActiveModalComment}
                 setTaskList={setTaskList}
                 tasksList={tasksList}
                 setSelectedTask={setSelectedTask}
-                setIsActiveModalComment={setIsActiveModalComment}
+                
             />
         </TableStyled>
     )

@@ -25,3 +25,7 @@ export async function addComment(params){
     }
     return fetchHandler(`${BASE_API}/comments/`,options);
 }
+
+export async function getComments(){
+    return fetchHandler(`${BASE_API}/comments/`);
+}
