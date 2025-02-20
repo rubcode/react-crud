@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { ButtonIcon } from '../Forms/button'
 
 
 const TbodyStyled = styled.tbody`
@@ -14,15 +15,22 @@ const TbodyStyled = styled.tbody`
     }
 `
 
-function TbodyComponent({data}) {
+function TbodyComponent({...props}) {
+    const type = props.type
     return (
         <TbodyStyled>
             {
-                data.map((item,index) =>{
+                props.data.map((item,index) =>{
                     return <tr key={index}>
-                            <td key={`${index}_ID`}>{item['id']}</td>
-                            <td key={`${index}_task`}>{item['comment']}</td>
-                           
+                            <td key={`${index}_ID_${type}`}>{item['id']}</td>
+                            <td key={`${index}_comment_${type}`}>{item['comment']}</td>
+                            <td key={`${index}_actions_${type}`}>
+                                {
+                                    props.actions.map(action=> {
+                                        return <ButtonIcon text={action.icon} onClick={() => action.action(item)}/>
+                                    })
+                                }
+                            </td>
                         </tr>
                     
                 })

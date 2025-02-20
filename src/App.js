@@ -1,6 +1,6 @@
 import './App.css';
 import Home from './Components/home';
-import TaskView from './Components/TaskView';
+import TaskView from './Components/task-view';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Task/" element={<TaskView />} />
+        <Route path="/:idTask" element={<TaskView />} />
       </Routes>
     </Router>
   );

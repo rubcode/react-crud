@@ -26,6 +26,17 @@ export async function addComment(params){
     return fetchHandler(`${BASE_API}/comments/`,options);
 }
 
+export async function updateTask(params,ID){
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify(params),
+        headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'}
+    }
+    return fetchHandler(`${BASE_API}/comments/${ID}`,options);
+}
+
 export async function getComments(){
     return fetchHandler(`${BASE_API}/comments/`);
 }

@@ -3,7 +3,9 @@ import { ButtonIcon } from '../Forms/button'
 import { FaEdit } from "react-icons/fa";
 import { FaComment } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { FaEye } from "react-icons/fa";
 import { deleteTask } from '../../Services/task';
+import { useNavigate } from "react-router-dom";
 
 const TbodyStyled = styled.tbody`
     
@@ -19,6 +21,7 @@ const TbodyStyled = styled.tbody`
 `
 
 function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask,setIsActiveModalComment}) {
+    const navigator = useNavigate();
     function handlerAddComment(Task){
         setIsActiveModalComment(true)
         setSelectedTask(Task)
@@ -28,6 +31,12 @@ function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask,setI
         setIsActiveModal(true)
         setSelectedTask(Task)
     }
+
+    function handlerViewTask(ID){
+        navigator(`/${ID}`)
+    }
+
+
     async function handlerDelete(ID){
         const params = {
             "id": ID
@@ -53,6 +62,7 @@ function Tbody({data,tasksList,setTaskList,setIsActiveModal,setSelectedTask,setI
                             <td key={`${index}_deadline`}>{item['deadline']}</td>
                             <td key={`${index}_status`}>{item['status']}</td>
                             <td key={`${index}_actions`}>
+                                <ButtonIcon text={<FaEye/>} onClick={() => handlerViewTask(item['id'])}/>
                                 <ButtonIcon text={<FaComment/>} onClick={() => handlerAddComment(item)}/>
                                 <ButtonIcon text={<FaEdit/>} onClick={() => handlerEdit(item)}/>
                                 <ButtonIcon text={<MdDelete/>} onClick={() => handlerDelete(item['id'])}/>

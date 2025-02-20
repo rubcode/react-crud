@@ -17,6 +17,7 @@ function TableComponent({...props}) {
             />
             <TbodyComponent 
                 data={props.data}
+                actions={props.actions}
             />
         </TableStyled>
     )
