@@ -21,7 +21,7 @@ function TbodyComponent({...props}) {
         <TbodyStyled>
             {
                 props.data.map((item,index) =>{
-                    return <tr key={index}>
+                    return <tr key={`tr_${index}_${type}`}>
                             {
                                 props.fieldData.map(field => {
                                     if(field === 'no'){

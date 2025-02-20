@@ -3,10 +3,12 @@ import Nav from './Containers/nav.js';
 import FormUsers from './Forms/form-users.js';
 import ContainerTable from './Containers/container-table.js';
 import TableComponent from "./Table/table-component"
+import ModalContentUserEdit from './Modals/modal-user-edit.js';
 import { useState, useEffect } from 'react';
 import { getUsers } from '../Services/users.js';
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { deleteUsers } from '../Services/users.js';
 function Users() {
     const [usersList, setUsersList] = useState([])
     const [headers, setHeaders] = useState([])
@@ -27,15 +29,23 @@ function Users() {
         }); 
       },[]);
 
-      function handlerEdit(comment){
+      function handlerEdit(user){
         setIsActiveModalUserEdit(true)
-        setSelectedUser(comment)
+        setSelectedUser(user)
       }
 
-      async function handlerDelete(comment){
-        const ID = comment.id
+      async function handlerDelete(user){
+        console.log(user)
+        const ID = user.id_user
         const params = {
           "id": ID
+        }
+        const response = await deleteUsers(params)
+        if(response.data.code === "000"){
+            const users = usersList.filter(item => item.id !== ID)  
+            setUsersList(users)
+        }else{
+            console.log(response)
         }
         
 
@@ -47,7 +57,18 @@ function Users() {
                     <li key="nav_menu_tareas"><a href='/'>Tareas</a></li>        
                 </ul>
             </Nav>
+            {
+
+            usersList.length ?
             <Layout>
+                  <ModalContentUserEdit
+                    isActiveModalUserEdit={isActiveModalUserEdit}
+                    setIsActiveModalUserEdit={setIsActiveModalUserEdit}
+                    selectedUser={selectedUser}
+                    setSelectedUser={setSelectedUser}
+                    usersList={usersList}
+                    setUsersList={setUsersList}
+                  />
                 <h1 className='title'>Usuarios</h1>
                 <FormUsers
                     usersList={usersList}
@@ -71,7 +92,8 @@ function Users() {
                           ]}
                     />
                 </ContainerTable>
-            </Layout>
+            </Layout> : null
+          }
         </>
     )
 }
