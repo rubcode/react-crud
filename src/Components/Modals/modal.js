@@ -87,7 +87,7 @@ function ModalContent({...props}) {
         const index = list.findIndex(obj => obj.ID === ID);
         const response = await updateTask(params,ID)
         if(response.data.code === "000"){
-            list[index] = {"ID":1,"task":task,"deadline": deadline}
+            list[index] = {"ID":ID,"task":task,"deadline": deadline}
             props.setTaskList(list)
             props.setIsActiveModal(false)
         }else{

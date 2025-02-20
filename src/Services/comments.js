@@ -26,7 +26,7 @@ export async function addComment(params){
     return fetchHandler(`${BASE_API}/comments/`,options);
 }
 
-export async function updateTask(params,ID){
+export async function updateComment(params,ID){
     const options = {
         method: 'PUT',
         body: JSON.stringify(params),
@@ -35,6 +35,16 @@ export async function updateTask(params,ID){
         'Content-Type': 'application/json'}
     }
     return fetchHandler(`${BASE_API}/comments/${ID}`,options);
+}
+
+export async function deleteComment(params){
+    const options = {
+        method: 'DELETE',
+        headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'}
+    }
+    return fetchHandler(`${BASE_API}/comments/${params.id}`,options);
 }
 
 export async function getComments(){

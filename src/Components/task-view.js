@@ -7,12 +7,14 @@ import { useState,useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { deleteComment } from "../Services/comments"
 
 function TaskView() {
     const params = useParams();
     let idTask = params.idTask
     const [headersComments, setHeadersComments] = useState([])
     const [commentsList, setCommentsList] = useState([])
+    const [selectedComment, setSelectedComment] = useState({})
     const [isActiveModalCommentEdit,setIsActiveModalCommentEdit] = useState(false)
 
     if(!idTask)
@@ -26,19 +28,31 @@ function TaskView() {
           }
           
           const commentsList = data.data
-          const filteredComments = commentsList.filter(comment => parseInt(comment.id) === parseInt(idTask))
+          const filteredComments = commentsList.filter(comment => parseInt(comment.id_task) === parseInt(idTask))
           const headers =  (filteredComments.length > 0) ? ["NO","COMENTARIO","ACCIONES"] : []
           setCommentsList(filteredComments)
           setHeadersComments(headers)
         }); 
       },[idTask]);
 
-      function handlerEdit(item){
+      function handlerEdit(comment){
         setIsActiveModalCommentEdit(true)
+        setSelectedComment(comment)
       }
-      function handlerDelete(item){
-        const ID = item.id
-        console.log(ID)
+
+      async function handlerDelete(comment){
+        const ID = comment.id
+        const params = {
+          "id": ID
+        }
+        const response = await deleteComment(params)
+        if(response.data.code === "000"){
+            const comments = commentsList.filter(item => item.id !== ID)  
+            setCommentsList(comments)
+        }else{
+            console.log(response)
+        }
+
       }
     return (
         <Layout>
@@ -48,6 +62,10 @@ function TaskView() {
                   <ModalCommentEdit
                     isActiveModalCommentEdit={isActiveModalCommentEdit}
                     setIsActiveModalCommentEdit={setIsActiveModalCommentEdit}
+                    selectedComment={selectedComment}
+                    setSelectedComment={setSelectedComment}
+                    commentsList={commentsList}
+                    setCommentsList={setCommentsList}
                   />
                   <h1 className="title">Comentarios</h1>
                   <ContainerTable>

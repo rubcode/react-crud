@@ -4,6 +4,7 @@ import Overlay from './overlay';
 import TextArea from '../Forms/text-area';
 import { Button } from '../Forms/button'
 import ReactDOM from 'react-dom'
+import { updateComment } from '../../Services/comments'
 
 const modalRoot = document.getElementById("portal-comments-edit");
 
@@ -54,15 +55,37 @@ const ModalContentStyled = styled.div`
 
 function ModalContentCommentEdit({...props}) {
     const form = useRef(null)
-    
+    function handlerChangeComment(e){
+        const updatedComment = { ...props.selectedComment, comment: e.target.value };
+        props.setSelectedComment(updatedComment)
+    }
 
     async function handlerSubmit(e){
         e.preventDefault()
         const formData = new FormData(form.current)
-       
-            
-
+        const ID = props.selectedComment.id
+        const comment = formData.get("comment")
+        const idTask = props.selectedComment.id_task;
+        const status = props.selectedComment.status;
+        let list = props.commentsList
+        const params = {
+            "id": ID,
+            "comment": comment,
+            "idTask": idTask,
+            "status": status
+        }
+        const index = list.findIndex(obj => obj.id === ID);
+        const response = await updateComment(params,ID)
+        if(response.data.code === "000"){
+            list[index] = {...list[index],comment:comment}
+            props.setCommentsList(list)
+            props.setIsActiveModalCommentEdit(false)
+        }else{
+            console.log(response)
+        }
+               
     }
+
     return (
         <Overlay>
             <ModalContentStyled>
@@ -71,6 +94,8 @@ function ModalContentCommentEdit({...props}) {
                     <TextArea 
                         name='comment'
                         placeholder='Escribe tu comentario'
+                        onChange={handlerChangeComment}
+                        value={props.selectedComment.comment}
                     />
                      <Button
                         text="Editar Comentario"
@@ -89,6 +114,9 @@ export default function ModalCommentEdit({...props}){
                 <ModalContentCommentEdit 
                     setIsActiveModalCommentEdit={props.setIsActiveModalCommentEdit}
                     selectedComment={props.selectedComment}
+                    setSelectedComment={props.setSelectedComment}
+                    commentsList={props.commentsList}
+                    setCommentsList={props.setCommentsList}
                 />
             </ModalPortal>
         )
