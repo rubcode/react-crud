@@ -22,8 +22,14 @@ function TbodyComponent({...props}) {
             {
                 props.data.map((item,index) =>{
                     return <tr key={index}>
-                            <td key={`${index}_ID_${type}`}>{item['id']}</td>
-                            <td key={`${index}_comment_${type}`}>{item['comment']}</td>
+                            {
+                                props.fieldData.map(field => {
+                                    if(field === 'no'){
+                                        return <td key={`${index}_${field}_${type}`}>{index+1}</td>
+                                    }
+                                    return <td key={`${index}_${field}_${type}`}>{item[field]}</td>
+                                })
+                            }
                             <td key={`${index}_actions_${type}`}>
                                 {
                                     props.actions.map(action=> {

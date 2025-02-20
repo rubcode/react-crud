@@ -73,6 +73,7 @@ function TaskView() {
                           headers={headersComments}
                           data={commentsList}
                           type="comments"
+                          fieldData={['no','comment']}
                           actions={[
                               {
                                   icon: <FaEdit />,

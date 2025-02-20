@@ -42,11 +42,6 @@ function Form({...props}) {
             props.setTask("")
             props.setDeadline("")
         }
-        
-        
-        
-
-       
     }
     return (
         <FormStyled ref={form} onSubmit={handlerSubmit}>
