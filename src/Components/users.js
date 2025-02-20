@@ -57,9 +57,8 @@ function Users() {
                     <li key="nav_menu_tareas"><a href='/'>Tareas</a></li>        
                 </ul>
             </Nav>
-            {
 
-            usersList.length ?
+            
             <Layout>
                   <ModalContentUserEdit
                     isActiveModalUserEdit={isActiveModalUserEdit}
@@ -74,6 +73,9 @@ function Users() {
                     usersList={usersList}
                     setUsersList={setUsersList} 
                 />
+                {
+                usersList.length ?
+
                 <ContainerTable>
                     <TableComponent
                         type={"users"}
@@ -91,9 +93,9 @@ function Users() {
                               }
                           ]}
                     />
-                </ContainerTable>
-            </Layout> : null
-          }
+                </ContainerTable> : null
+                }
+            </Layout>
         </>
     )
 }
