@@ -1,5 +1,5 @@
-import Layout from "./layout"
-import ContainerTable from "./container-table"
+import Layout from "./Containers/layout"
+import ContainerTable from "./Containers/container-table"
 import TableComponent from "./Table/table-component"
 import { getComments } from "../Services/comments"
 import { useState,useEffect } from "react"

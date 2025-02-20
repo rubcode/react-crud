@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Select from './select'
+import Select from '../Forms/select'
 import { useEffect } from 'react';
 
 const FiltersStyled = styled.div`

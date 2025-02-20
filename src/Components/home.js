@@ -1,9 +1,9 @@
-import Layout from './layout.js';
-import Form from './form';
-import ContainerTable from './container-table';
-import Table from './table';
-import Modal from './modal';
-import Filters from './filters';
+import Layout from './Containers/layout.js';
+import Form from './Forms/form';
+import ContainerTable from './Containers/container-table.js';
+import Table from './Table/table.js';
+import Modal from './Modals/modal';
+import Filters from './Containers/filters.js';
 import { useState, useEffect } from 'react';
 import { getTasks } from '../Services/task';
 import ModalComments from './Modals/ModalContentComments';

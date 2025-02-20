@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { ButtonIcon } from './button'
+import { ButtonIcon } from '../Forms/button'
 import { FaEdit } from "react-icons/fa";
 import { FaComment } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { deleteTask } from '../Services/task';
+import { deleteTask } from '../../Services/task';
 
 const TbodyStyled = styled.tbody`
     

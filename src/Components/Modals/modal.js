@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components'
 import Overlay from './overlay'
-import InputText from './input-text'
-import { Button } from './button'
-import { updateTask } from '../Services/task';
+import InputText from '../Forms/input-text'
+import { Button } from '../Forms/button'
+import { updateTask } from '../../Services/task';
 import ReactDOM from 'react-dom'
 
 const modalRoot = document.getElementById("portal");

@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components'
-import Overlay from '../overlay';
-import TextArea from '../text-area';
-import { Button } from '../button'
+import Overlay from './overlay';
+import TextArea from '../Forms/text-area';
+import { Button } from '../Forms/button'
 import ReactDOM from 'react-dom'
 import { addComment } from '../../Services/comments';
 

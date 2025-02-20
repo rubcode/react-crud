@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import InputText from './input-text'
 import {Button} from './button'
 import { useRef } from 'react'
-import { addTask } from '../Services/task'
+import { addTask } from '../../Services/task'
 
 const FormStyled = styled.form`
     width: 100%;
