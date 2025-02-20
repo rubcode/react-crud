@@ -12,6 +12,7 @@ const FormStyled = styled.form`
     padding-block: 1rem;
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 1.5rem;
     align-items: center;
 `

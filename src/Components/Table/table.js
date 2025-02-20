@@ -7,6 +7,14 @@ const TableStyled = styled.table`
     display: table;
     border-collapse: collapse;
     text-align: center;
+
+    @media (max-width: 750px) {
+    &{
+        width: 100%;
+        table-layout: auto;
+    }
+    
+    }
 `
 
 function Table({headers,data,tasksList,setTaskList,setIsActiveModal,setSelectedTask,setIsActiveModalComment}) {

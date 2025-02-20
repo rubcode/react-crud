@@ -34,6 +34,11 @@ export const ButtonIcon = styled(Button)`
     &:hover{
         color: var(--accentColor);
     }
+    @media (max-width: 750px) {
+        &{
+            font-size: 1.3rem;
+        }
+    }
 `
 
 export const ButtonContrast = styled(Button)`

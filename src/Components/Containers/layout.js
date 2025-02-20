@@ -7,6 +7,11 @@ const LayoutStyled = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2em;
+    @media (max-width: 750px) {
+        &{
+            padding-inline: 1.5rem;
+        }
+    }
 `
 
 function Layout({children}) {

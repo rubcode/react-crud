@@ -11,6 +11,11 @@ const TheadStyled = styled.thead`
         padding-inline: 1rem;
         text-align: center;
     }
+    @media (max-width: 750px) {
+        &{
+            font-size: 0.8rem;
+        }
+    }
 `
 
 function TheadComponent({headers}) {

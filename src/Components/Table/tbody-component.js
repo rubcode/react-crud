@@ -13,6 +13,11 @@ const TbodyStyled = styled.tbody`
         text-align: center;
         color: var(--black);
     }
+    @media (max-width: 750px) {
+        &{
+            font-size: 0.8rem;
+        }
+    }
 `
 
 function TbodyComponent({...props}) {

@@ -21,7 +21,7 @@ const GlobalStylesStyled = createGlobalStyle`
         font: var(--bodyRegular);
         margin: 0;
         background-image: url("assets/bg-wood.jpg");
-        background-repeat: no-repeat;
+        background-repeat: repeat;
         background-size: cover;
     }
     *{
