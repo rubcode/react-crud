@@ -6,6 +6,7 @@ import Modal from './Modals/modal';
 import Filters from './Containers/filters.js';
 import { useState, useEffect } from 'react';
 import { getTasks } from '../Services/task';
+import Nav from './Containers/nav';
 import ModalComments from './Modals/ModalContentComments';
 
 function Home() {
@@ -36,6 +37,11 @@ function Home() {
 
     return (
         <div>
+            <Nav>
+                <ul className='items'>
+                    <li key="nav_menu_usuaros"><a href='Users'>Usuarios</a></li>
+                </ul>
+            </Nav>
             <Layout>
                 <ModalComments
                     selectedTask={selectedTask}
