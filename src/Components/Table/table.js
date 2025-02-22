@@ -9,10 +9,10 @@ const TableStyled = styled.table`
     text-align: center;
 
     @media (max-width: 750px) {
-    &{
-        width: 100%;
-        table-layout: auto;
-    }
+        &{
+            width: 100%;
+            table-layout: auto;
+        }
     
     }
 `

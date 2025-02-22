@@ -15,6 +15,12 @@ const FormUsersStyled = styled.form`
     flex-wrap: wrap;
     gap: 1.5rem;
     align-items: center;
+    @media (max-width: 600px) {
+        &{
+            flex-direction: column;
+        }
+    
+    }
 `
 
 function FormUsers({...props}) {
